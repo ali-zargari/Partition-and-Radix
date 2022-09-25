@@ -102,6 +102,7 @@ public class RadixSort {
 	     * Because by reversing the order in which we place the final elements in the output array, we actually reverse
 	     * the order of the 'sub-arrays'
 	     *
+	     * countingSort2 is unstable.
 	     */
 		
 	}
