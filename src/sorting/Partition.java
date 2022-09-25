@@ -31,8 +31,13 @@ public class Partition {
      * What sort of input arrays will enable Hoare’s algorithm to still create relatively 
      * equal size partitions whereas Lomuto’s algorithm will create unequal partitions?
      *
-     * Arrays that have a lot of the same elements in a row, and arrays that have fully all equal elements.
-     *
+     * Arrays that have a lot of the same elements in a row, arrays that have all equal elements, as well as arrays that
+     * have every single item on one side of the chosen pivot being bigger than the other, despite being different values.
+     * For example:
+     *              [1, 1, 1, 1, 1, 1, 1, 1],
+     * 				[1, 1, 1, 1, 1, 1, 1, 999],
+     *				[999, 999, 999, 999, 999, 1],
+     * 				[1, 2, 3, 4, 5, 6, 999],
      */
 	
 	public static int partitionHoare(int[] arr,int low, int high) {

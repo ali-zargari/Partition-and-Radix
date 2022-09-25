@@ -35,6 +35,7 @@ public class RadixSort {
 		}
 
 		//place the elements in their correct spot/index in the output array.
+		//maintain the relative order.
 		for(int i = arr.length-1; i >=0 ; i--){
 			output[count[(arr[i]/place)%10]-1] = arr[i];
 			count[(arr[i]/place)%10]--;
@@ -65,7 +66,7 @@ public class RadixSort {
 		/**********YOUR CODE GOES HERE***********/
 
 
-		//count each element
+		//count each element and record in the count array.
 		for (int i : arr) {
 			count[(i/place)%10]++;
 		}
@@ -99,10 +100,14 @@ public class RadixSort {
 	    /*
 	     * Why is RadixSort2 not working?
 	     *
-	     * Because by reversing the order in which we place the final elements in the output array, we actually reverse
-	     * the order of the 'sub-arrays'
+	     * in the forloop that we reversed in countingSort2(...), output[count[arr[i]]-1] = arr[i] gives us the
+	     * cumulative count. It tells us the index of the last counted element in reverse (because we count from
+	     * 0 to n, and n is the index that is saved in count). Therefore, we have to count this index in reverse
+	     * to get the correct order of the same elements.
 	     *
-	     * countingSort2 is unstable.
+	     * In other words, countingSort2 is correct, but it is UNSTABLE, rendering RadixSor2 incorrect as it requires a
+	     * stable algorithm.
+	     *
 	     */
 		
 	}
@@ -112,7 +117,7 @@ public class RadixSort {
 
 		//RadixSort.radixSort1(arr);
 
-		RadixSort.radixSort1(arr);
+		RadixSort.radixSort2(arr);
 		for(int a : arr) System.out.print(a + " ");
 	}
 
