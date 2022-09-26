@@ -7,22 +7,23 @@ public class Partition {
 	
 	public static int partitionLomuto(int[] arr,int low, int high) {
 		int pivot = arr[high];
-		int j = low;
+		int j = low-1;
 
 		for(int i = low; i < high; i++){
-			if(arr[i] < pivot){
+			if(arr[i] <= pivot){
+				j++;
 				int temp = arr[i];
 				arr[i] = arr[j];
 				arr[j] = temp;
-				j++;
+
 			}
 		}
 
-		int temp = arr[j];
-		arr[j] = arr[high];
-		arr[high] = temp;
+		int temp = arr[high];
+		arr[high] = arr[j+1];
+		arr[j+1] = temp;
 
-		return j;
+		return j+1;
 
 	}
 	
@@ -31,13 +32,10 @@ public class Partition {
      * What sort of input arrays will enable Hoare’s algorithm to still create relatively 
      * equal size partitions whereas Lomuto’s algorithm will create unequal partitions?
      *
-     * Arrays that have a lot of the same elements in a row, arrays that have all equal elements, as well as arrays that
-     * have every single item on one side of the chosen pivot being bigger than the other, despite being different values.
-     * For example:
+     * Arrays that have all equivalent values will not be efficient in Lomuto, as well as arrays that have alot of
+     * the same elements.
+     *
      *              [1, 1, 1, 1, 1, 1, 1, 1],
-     * 				[1, 1, 1, 1, 1, 1, 1, 999],
-     *				[999, 999, 999, 999, 999, 1],
-     * 				[1, 2, 3, 4, 5, 6, 999],
      */
 	
 	public static int partitionHoare(int[] arr,int low, int high) {
@@ -50,11 +48,11 @@ public class Partition {
 		{
 			do {
 				low_i++;
-			} while (arr[low_i] < pivot);
+			} while (arr[low_i] >= pivot);
 
 			do {
 				high_i--;
-			} while (arr[high_i] > pivot);
+			} while (arr[high_i] <= pivot);
 
 			if (low_i < high_i) {
 				int temp = arr[low_i];
@@ -68,11 +66,9 @@ public class Partition {
 
 
 	public static void main(String [] args){
-		int [] arr = new int[]{5,3,8,4,2,7,1,9};
+		int [] arr = new int[]{5,3,8,4,2,7,1,9,1};
 
 		System.out.println(Partition.partitionHoare(arr, 0, arr.length-1));
 		for(int a : arr) System.out.print(a + " ");
 	}
-
-
 }
